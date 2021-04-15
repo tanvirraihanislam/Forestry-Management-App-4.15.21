@@ -1,0 +1,173 @@
+package com.cg.fms.dto;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="contractDetails")
+public class Contract {
+	
+	@Id
+	@Column(name="contractNumber")
+	private String contractNumber;
+	
+	@Column(name="deliveryPlace")
+	private String deliveryPlace;
+
+	@Column(name="deliveryDate")
+	private String deliveryDate;
+
+	@Column(name="quantity")
+	private String quantity;
+
+	
+	@ManyToOne 				// many contracts have one scheduler 
+	@JoinColumn(name="schedulerId")
+	private Scheduler scheduler;
+
+
+	@ManyToOne
+	@JoinColumn(name="customerId")
+	private Customer customer;
+
+
+	public Contract(String contractNumber, String deliveryPlace, String deliveryDate, String quantity,
+			Scheduler scheduler, Customer customer) {
+		super();
+		this.contractNumber = contractNumber;
+		this.deliveryPlace = deliveryPlace;
+		this.deliveryDate = deliveryDate;
+		this.quantity = quantity;
+		this.scheduler = scheduler;
+		this.customer = customer;
+	}
+
+
+	public Contract() {
+		super();
+	}
+
+
+	public String getContractNumber() {
+		return contractNumber;
+	}
+
+
+	public void setContractNumber(String contractNumber) {
+		this.contractNumber = contractNumber;
+	}
+
+
+	public String getDeliveryPlace() {
+		return deliveryPlace;
+	}
+
+
+	public void setDeliveryPlace(String deliveryPlace) {
+		this.deliveryPlace = deliveryPlace;
+	}
+
+
+	public String getDeliveryDate() {
+		return deliveryDate;
+	}
+
+
+	public void setDeliveryDate(String deliveryDate) {
+		this.deliveryDate = deliveryDate;
+	}
+
+
+	public String getQuantity() {
+		return quantity;
+	}
+
+
+	public void setQuantity(String quantity) {
+		this.quantity = quantity;
+	}
+
+
+	public Scheduler getScheduler() {
+		return scheduler;
+	}
+
+
+	public void setScheduler(Scheduler scheduler) {
+		this.scheduler = scheduler;
+	}
+
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((contractNumber == null) ? 0 : contractNumber.hashCode());
+		result = prime * result + ((deliveryDate == null) ? 0 : deliveryDate.hashCode());
+		result = prime * result + ((deliveryPlace == null) ? 0 : deliveryPlace.hashCode());
+		result = prime * result + ((quantity == null) ? 0 : quantity.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Contract other = (Contract) obj;
+		if (contractNumber == null) {
+			if (other.contractNumber != null)
+				return false;
+		} else if (!contractNumber.equals(other.contractNumber))
+			return false;
+		if (deliveryDate == null) {
+			if (other.deliveryDate != null)
+				return false;
+		} else if (!deliveryDate.equals(other.deliveryDate))
+			return false;
+		if (deliveryPlace == null) {
+			if (other.deliveryPlace != null)
+				return false;
+		} else if (!deliveryPlace.equals(other.deliveryPlace))
+			return false;
+		if (quantity == null) {
+			if (other.quantity != null)
+				return false;
+		} else if (!quantity.equals(other.quantity))
+			return false;
+		return true;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Contract [contractNumber=" + contractNumber + ", deliveryPlace=" + deliveryPlace + ", deliveryDate="
+				+ deliveryDate + ", quantity=" + quantity + "]";
+	}
+
+	
+
+	
+	
+	
+	
+}

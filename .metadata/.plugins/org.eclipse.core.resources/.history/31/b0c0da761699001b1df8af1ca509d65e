@@ -1,0 +1,14 @@
+package com.cg.fms.dao;
+
+public interface ILandDao {
+	
+	public Land getLand(String surveyNumber);
+
+	public boolean addLand(Land land);
+
+	public boolean updateLand(Land land);
+
+	public boolean deleteLand(String surveyNumber);
+	
+	public List<Land> getAllLands();
+}

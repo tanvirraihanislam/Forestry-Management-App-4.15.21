@@ -1,0 +1,43 @@
+package com.cg.fms.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.cg.fms.dto.Land;
+import com.cg.fms.service.LandService;
+
+@RestController
+@RequestMapping("land")
+public class LandController {
+	
+	@Autowired
+	LandService lanser;
+	
+	@GetMapping("{landId}")
+	public ResponseEntity<?> getLand(@PathVariable("landId") String landId ){
+		
+		Land land = lanser.getLand(landId);
+		if(land != null) {
+			return new ResponseEntity<Land>(land, HttpStatus.FOUND);
+		}
+		else {
+			return new ResponseEntity<String>("land details with id  " + landId + " is not found", HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@PostMapping
+	public String addLand(@RequestBody Land land) {
+		if(lanser.addLand(land))
+			return "Land added successfully";
+		else
+			return "Land data is duplicated";
+	}
+	
+}

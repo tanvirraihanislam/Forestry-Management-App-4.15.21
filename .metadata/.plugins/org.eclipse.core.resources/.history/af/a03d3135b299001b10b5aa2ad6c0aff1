@@ -1,0 +1,54 @@
+package com.cg.fms.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
+import com.cg.fms.dao.ProductDao;
+import com.cg.fms.dto.Product;
+import com.cg.fms.repo.ProductRepository;
+@Service
+public class ProductServiceImpl implements ProductService {
+
+	@Autowired
+	@Qualifier("ProductDaoImpl")
+	ProductDao productdao;
+	
+	@Override
+	public Product getProduct(String productId) {
+		// TODO Auto-generated method stub
+	return	pservice.getProduct(productId);
+		
+	}
+
+	@Override
+	public boolean addProduct(Product product) {
+		// TODO Auto-generated method stub
+		return pservice.addProduct(product);
+	}
+
+	@Override
+	public boolean updateProduct(Product product) {
+		// TODO Auto-generated method stub
+		return pservice.updateProduct(product);
+	}
+
+	@Override
+	public boolean deleteProduct(String productId) {
+		// TODO Auto-generated method stub
+		return pservice.deleteProduct(productId);
+	}
+
+	@Override
+	public List<Product> getAllProducts() {
+		// TODO Auto-generated method stub
+		return pservice.getAllProducts();
+	}
+    
+	
+
+	
+}

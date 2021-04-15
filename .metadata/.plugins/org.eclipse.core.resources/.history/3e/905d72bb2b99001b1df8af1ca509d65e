@@ -1,0 +1,28 @@
+package com.cg.fms.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
+import com.cg.fms.dao.ContractDao;
+import com.cg.fms.dto.Contract;
+import com.cg.fms.repo.ContractRepository;
+
+@Service
+public class ContractServiceImpl implements ContractService {
+	
+	@Autowired
+	@Qualifier("ContractDaoImpl")
+	ContractDao contdao;
+	
+	@Override
+	public Contract getContract(int contractNumber) {
+		
+		return contdao.getContract(contractNumber);
+		
+		
+	}
+	
+	
+}

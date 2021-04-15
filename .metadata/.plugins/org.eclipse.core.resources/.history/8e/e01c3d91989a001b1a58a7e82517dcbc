@@ -1,0 +1,144 @@
+package com.cg.fms.dto;
+
+import java.time.LocalDate;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="contractDetails")
+public class Contract {
+	
+	@Id
+	@Column(name="contractNumber")
+	private String contractNumber;
+	
+	@Column(name="quotation")
+	private String quotation;
+	
+	@Column(name="startDate")
+	private Date startDate;
+	
+	@Column(name="endDate")
+	private Date endDate;
+	
+	@Column(name="contractStatus")
+	private String contractStatus;
+
+
+	@ManyToOne
+	@JoinColumn(name="customerId")
+	private Customer customer;
+	
+	@OneToOne
+	@JoinColumn(name="landId")
+	private Land land;
+	
+	@ManyToOne
+	@JoinColumn(name="schedulerId")
+	private Scheduler scheduler;
+	
+
+	
+
+	public Contract(String contractNumber, String quotation, LocalDate startDate, LocalDate endDate, String contractStatus,
+			Customer customer, Land land, Scheduler scheduler) {
+		super();
+		this.contractNumber = contractNumber;
+		this.quotation = quotation;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.contractStatus = contractStatus;
+		this.customer = customer;
+		this.land = land;
+		this.scheduler = scheduler;
+	}
+
+	public Contract() {
+		super();
+	}
+
+	public String getContractNumber() {
+		return contractNumber;
+	}
+
+	public void setContractNumber(String contractNumber) {
+		this.contractNumber = contractNumber;
+	}
+
+	public String getQuotation() {
+		return quotation;
+	}
+
+	public void setQuotation(String quotation) {
+		this.quotation = quotation;
+	}
+
+	public LocalDate getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(LocalDate startDate) {
+		this.startDate = startDate;
+	}
+
+	public LocalDate getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(LocalDate endDate) {
+		this.endDate = endDate;
+	}
+
+	public String getContractStatus() {
+		return contractStatus;
+	}
+
+	public void setContractStatus(String contractStatus) {
+		this.contractStatus = contractStatus;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public Land getLand() {
+		return land;
+	}
+
+	public void setLand(Land land) {
+		this.land = land;
+	}
+
+	
+	public Scheduler getScheduler() {
+		return scheduler;
+	}
+
+	public void setScheduler(Scheduler scheduler) {
+		this.scheduler = scheduler;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Contract [contractNumber=" + contractNumber + ", quotation=" + quotation + ", startDate=" + startDate
+				+ ", endDate=" + endDate + ", contractStatus=" + contractStatus + ", customer=" + customer + ", land="
+				+ land + "]";
+	}
+
+	
+
+	
+}

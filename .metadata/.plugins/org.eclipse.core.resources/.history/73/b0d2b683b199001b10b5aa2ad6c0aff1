@@ -1,0 +1,70 @@
+package com.cg.fms.dao;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.cg.fms.dto.Product;
+import com.cg.fms.repo.ProductRepository;
+
+@Component("ProductDaoImpl")
+public class ProductDaoImpl implements ProductDao {
+
+	@Autowired
+	ProductRepository prepo;
+
+	@Override
+	public Product getProduct(String productId) {
+		// TODO Auto-generated method stub
+		if (prepo.existsById(productId)) {
+			Optional<Product> op = prepo.findById(productId);
+			if (op.isPresent()) {
+				Product p = op.get();
+				return p;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public boolean addProduct(Product product) {
+		// TODO Auto-generated method stub
+		if (prepo.existsById(product.getProductId())) {
+			System.out.println(" Entered product already Exists");
+			prepo.save(product);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean updateProduct(Product product) {
+		// TODO Auto-generated method stub
+		if (prepo.existsById(product.getProductId())) {
+			prepo.save(product);
+			return true;
+		}
+
+		return false;
+	}
+
+	@Override
+	public boolean deleteProduct(String productId) {
+		// TODO Auto-generated method stub
+		if(prepo.existsById(productId)) {
+			prepo.deleteById(productId);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public List<Product> getAllProducts() {
+		// TODO Auto-generated method stub
+		List<Product> list=(List<Product>)prepo.findAll();
+		return list;
+	}
+
+}

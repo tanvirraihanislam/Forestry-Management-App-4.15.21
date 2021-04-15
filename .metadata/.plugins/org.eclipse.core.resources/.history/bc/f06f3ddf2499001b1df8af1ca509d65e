@@ -1,0 +1,23 @@
+package com.cg.fms.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
+import com.cg.fms.dao.LandDao;
+import com.cg.fms.dto.Land;
+
+@Service
+public class LandServiceImpl implements LandService {
+	
+	@Autowired
+	@Qualifier("LandDaoImpl")
+	LandDao landdao;
+	
+	@Override
+	public Land getLand(String landId) {
+		
+		return landdao.getLand(landId);
+	}
+
+}

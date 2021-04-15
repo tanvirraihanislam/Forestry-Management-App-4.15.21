@@ -1,0 +1,44 @@
+package com.cg.fms.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.stereotype.Service;
+
+import com.cg.fms.dao.ContractDao;
+import com.cg.fms.dto.Contract;
+
+@Service
+public class ContractServiceImpl implements ContractService {
+	
+	@Autowired
+	@Qualifier("ContractDaoImpl")
+	ContractDao contractdao;
+	
+	@Override
+	public Contract getContract(String contractNumber) {
+		
+		return contractdao.getContract(contractNumber);	
+	}
+
+	@Override
+	public boolean addContract(Contract contract) {
+		try {
+			contractdao.addContract(contract);
+			return true;
+		} catch (DuplicateKeyException ex) {
+			return false;
+		}
+	}
+
+	@Override
+	public List<Contract> getAllContracts() {
+		return contractdao.getAllContracts();
+	}
+	
+	
+	
+	
+}

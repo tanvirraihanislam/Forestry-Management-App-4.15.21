@@ -1,0 +1,52 @@
+package com.cg.fms.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
+import com.cg.fms.dao.AdminDao;
+import com.cg.fms.dto.Admin;
+import com.cg.fms.exception.AdminException;
+
+@Service
+public class AdminServiceImpl implements AdminService{
+	
+	@Autowired
+	@Qualifier("AdminDaoImpl")
+	AdminDao admindao;
+
+	@Override
+	public Admin getAdmin(String adminId) {
+		return addao.getAdmin(adminId);
+	}
+
+	@Override
+	public List<Admin> getAllAdmins() {
+		return addao.getAllAdmins();
+	}
+
+	@Override
+	public boolean addAdmin(Admin admin) {
+		try {
+			addao.addAdmin(admin);
+			return true;
+		}catch(AdminException ae) {
+			return false;
+		}
+		
+	}
+
+	@Override
+	public boolean updateAdmin(Admin admin) {
+		
+		return addao.updateAdmin(admin);
+	}
+
+	@Override
+	public boolean deleteAdmin(String adminId) {
+		return addao.deleteAdmin(adminId);
+	}
+
+}

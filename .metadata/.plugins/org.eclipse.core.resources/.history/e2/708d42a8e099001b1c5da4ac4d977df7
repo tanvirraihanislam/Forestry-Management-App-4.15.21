@@ -1,0 +1,32 @@
+package com.cg.fms.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.cg.fms.dto.Order;
+import com.cg.fms.service.OrderService;
+
+@RestController
+@RequestMapping("orderDetails")
+public class OrderController {
+	
+	@Autowired
+	OrderService orderservice;
+	
+	@GetMapping("{orderNumber}")
+	public ResponseEntity<?> getOrder(@PathVariable("orderNumber") String orderNumber){
+		
+		Order order = orderservice.getOrder(orderNumber);
+		if(order == null)
+			return new ResponseEntity<String>("Order with Id " + orderNumber + " not found", HttpStatus.NOT_FOUND);
+		else
+			return new ResponseEntity<Order>(order, HttpStatus.FOUND);
+					
+	}
+}

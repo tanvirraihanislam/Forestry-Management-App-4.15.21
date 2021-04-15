@@ -1,0 +1,72 @@
+package com.cg.fms.service;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+
+import com.cg.fms.dto.Contract;
+import com.cg.fms.repo.ContractRepository;
+
+
+
+@SpringBootTest
+public class ContractServiceTest {
+	
+	@Autowired
+	private ContractService contractservice;
+	
+	@MockBean
+	private ContractRepository contractrepo;
+	
+	@Test
+	public void givenMultipleContractThenCompareTheCountWithGivenNumber() {
+		when(contractrepo.findAll())
+						 .thenReturn(Stream
+								 	.of(new Contract(null, null, null, null, null, null, null, null), 
+								 		new Contract(null, null, null, null, null, null, null, null))
+								 	.collect(Collectors.toList()));
+		
+		assertEquals(2, contractservice.getAllContracts().size());	
+	}
+	
+	@Test
+	public void givenContractnumberThenShouldReturnContractDetails() {
+		
+		String contractNumber = "101";
+		
+		String startDate = "03/05/2018";
+		String endDate = "10/11/2020";
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		Date strdate = null;
+		Date enddate = null;
+		try {
+			strdate = df.parse(startDate);
+			enddate = df.parse(endDate);
+		} catch (ParseException e1) {
+			System.out.println("wrong date formate");
+			e1.printStackTrace();
+		}
+		
+		
+		when(contractrepo.findById(contractNumber)).thenReturn(Stream
+								 	.of(new Contract("102", null, null, null, null, null, null, null), 
+								 		new Contract("103", "500000",strdate , enddate, "approved", null, null, null))
+								 	.collect(Collectors.toList()));
+		
+		Contract contract1 = new Contract("103", "500000", strdate, enddate, "approved", null, null, null);
+	
+		assertEquals(contract1, contractservice.getContract(contractNumber).si);
+	}
+}

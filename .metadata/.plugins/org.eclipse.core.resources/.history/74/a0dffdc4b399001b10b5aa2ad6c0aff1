@@ -1,0 +1,71 @@
+package com.cg.fms.dao;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.stereotype.Component;
+
+import com.cg.fms.dto.Customer;
+import com.cg.fms.repo.CustomerRepository;
+
+@Component("CustomerDaoImpl")
+public class CustomerDaoImpl implements CustomerDao {
+	
+	@Autowired
+	CustomerRepository customerRepo;
+
+	@Override
+	public Customer getCustomer(String customerId) {
+		
+		if(customerRepo.existsById(customerId)) {
+			Optional<Customer> ope = customerRepo.findById(customerId);
+			
+			if(ope.isPresent()) {
+				Customer ct = ope.get();
+				return ct;
+			}	
+		}
+		return null;
+	}
+
+	@Override
+	public void addCustomer(Customer customer) {
+			
+		if(customerRepo.existsById(customer.getCustomerId())) {
+			throw new DuplicateKeyException(null);
+		}
+		customerRepo.save(customer);
+	}
+
+	@Override
+	public boolean updateCustomer(Customer customer) {
+		if(customerRepo.existsById(customer.getCustomerId())) {
+			customerRepo.save(customer);
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean deleteCustomer(String customerId) {
+		if(customerRepo.existsById(customerId)) {
+			customerRepo.deleteById(customerId);
+			return true;
+		}
+		else
+			return false;
+	}
+
+	
+	@Override
+	public List<Customer> getAllCustomers() {
+		
+		List<Customer> list = customerRepo.findAll();
+		return list;
+	}
+
+	
+	
+}

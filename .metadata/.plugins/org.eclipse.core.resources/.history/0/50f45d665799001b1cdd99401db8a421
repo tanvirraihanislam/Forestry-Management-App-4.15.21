@@ -1,0 +1,17 @@
+package com.cg.fms.dao;
+
+import java.util.List;
+
+import com.cg.fms.dto.Admin;
+
+public interface AdminDao {
+	public Admin getAdmin(String adminId);
+
+//	public boolean addAdmin(Admin admin);
+	
+//	public boolean updateAdmin(Admin admin);
+
+//	public boolean deleteAdmin(String adminName);
+	
+	public List<Admin> getAllAdmins();
+}

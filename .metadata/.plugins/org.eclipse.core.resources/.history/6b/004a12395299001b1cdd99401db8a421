@@ -1,0 +1,30 @@
+
+	package com.cg.fms.service;
+
+	import org.springframework.beans.factory.annotation.Autowired;
+	import org.springframework.beans.factory.annotation.Qualifier;
+	import org.springframework.stereotype.Service;
+
+
+import com.cg.fms.dao.CustomerDao;
+import com.cg.fms.dto.Customer;
+import com.cg.fms.repo.CustomerRepository;
+
+
+	@Service
+	public class CustomerServiceImpl implements CustomerService {
+		
+		@Autowired
+		@Qualifier("CustomerDaoImpl")
+		CustomerDao custdao;
+		
+		@Override
+		public Customer getCustomer(String customerId) {
+			
+			return custdao.getCustomer(customerId);
+			
+			
+		}
+		
+		
+	}

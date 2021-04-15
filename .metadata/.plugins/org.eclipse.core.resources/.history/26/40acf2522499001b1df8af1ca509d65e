@@ -1,0 +1,39 @@
+package com.cg.fms.dao;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+
+import com.cg.fms.dto.Land;
+import com.cg.fms.repo.LandRepository;
+
+@Component("LandDaoImpl")
+public class LandDaoImpl implements LandDao {
+	
+	@Autowired
+	LandRepository landrepo;
+
+	@Override
+	public Land getLand(String landId) {
+		
+			Optional<Land> opt = landrepo.findById(landId);
+			if(opt.isPresent()) {
+				return opt.get();
+			}
+			else
+				return null;
+	}
+
+	@Override
+	public void addLand(Land land) {
+		
+		if(landrepo.existsById(land.getLandId())) {
+			throw new DuplicateKeyException(null);
+		}
+		landrepo.save(land);
+	}
+
+}

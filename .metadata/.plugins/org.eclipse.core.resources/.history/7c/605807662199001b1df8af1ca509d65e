@@ -1,0 +1,31 @@
+package com.cg.fms.dao;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.cg.fms.dto.Land;
+import com.cg.fms.repo.LandRepository;
+
+@Component("LandDaoImpl")
+public class LandDaoImpl implements LandDao {
+	
+	@Autowired
+	LandRepository landrepo;
+
+	@Override
+	public Land getLand(String landId) {
+		
+		if(landrepo.existsById(landId)) {
+			Optional<Land> opt = landrepo.findById(landId);
+			
+			if(opt.isPresent()) {
+				Land land = opt.get();
+				return land;
+			}
+		}
+		return null;
+	}
+
+}

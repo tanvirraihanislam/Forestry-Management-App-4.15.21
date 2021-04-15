@@ -1,0 +1,17 @@
+package com.cg.fms.dao;
+
+import java.util.List;
+
+import com.cg.fms.dto.Land;
+
+public interface LandDao {
+	
+	public Land getLand(String surveyNumber);
+
+	public boolean addLand(Land land);
+
+	public boolean updateLand(Land land);
+
+	public boolean deleteLand(String surveyNumber);
+	
+}

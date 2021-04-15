@@ -1,0 +1,9 @@
+package com.cg.fms.exception;
+
+@SuppressWarnings("serial")
+public class OrderException {
+	
+	public OrderException(String msg) {
+		super(msg);
+	}
+}

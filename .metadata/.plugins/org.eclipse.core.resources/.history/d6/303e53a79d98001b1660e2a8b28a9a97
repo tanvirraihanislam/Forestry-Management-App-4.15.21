@@ -1,0 +1,44 @@
+package com.cg.fms.dto;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="contractDetails")
+public class Contract {
+	
+	@Id
+	@Column(name="contractNumber")
+	private String contractNumber;
+	
+	@Column(name="deliveryPlace")
+	private String deliveryPlace;
+
+	@Column(name="deliveryDate")
+	private String deliveryDate;
+
+	@Column(name="quantity")
+	private String quantity;
+
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="schedulerId")
+	private Scheduler scheduler;
+
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="customerId")
+	private Customer customer;
+
+
+
+	
+	
+	
+	
+}

@@ -1,0 +1,6 @@
+package com.cg.fms.exception;
+
+@SuppressWarnings("serial")
+public class LandException {
+
+}
