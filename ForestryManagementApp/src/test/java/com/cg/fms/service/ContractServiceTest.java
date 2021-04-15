@@ -13,9 +13,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -38,15 +38,13 @@ public class ContractServiceTest {
 	@InjectMocks
 	private ContractServiceImpl contractservice;
 	private Contract contract;
+	private Contract contract2;
 	private List<Contract> contractList;
 	private Optional optional;
 	
 	@BeforeEach
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
-		Contract contract = new Contract("122222",500000);
-		optional = Optional.of(contract);
-		
 		
 		String startDate = "03/05/2018";
 		String endDate = "10/11/2020";
@@ -60,34 +58,52 @@ public class ContractServiceTest {
 			System.out.println("wrong date formate");
 			e1.printStackTrace();
 		}
+		contract = new Contract();
+		
+		contract.setContractNumber("101");
+		contract.setQuotation(500000);
+		contract.setStartDate(strdate);
+		contract.setEndDate(enddate);
+		contract.setAdmin(null);
+		contract.setContractStatus("Approved");
+		contract.setCustomer(null);
+		contract.setLand(null);
+		optional = Optional.of(contract);
 		
 		
-		Contract contract2 = new Contract(null,  0,  null,  null);
+		
+		contract2 = new Contract();
+
 		contract2.setContractNumber("102");
 		contract2.setQuotation(30000);
 		contract2.setStartDate(strdate);
 		contract2.setEndDate(enddate);
+		contract2.setAdmin(null);
+		contract2.setContractStatus("pending");
+		contract2.setCustomer(null);
+		contract2.setLand(null);
 		
 		
 	}
 	
 	@AfterEach
 	public void tearDown() {
-//		contract = null;
+		contract = null;
+		contract2 = null;
 	}
 	
 	@Test
+	@DisplayName("Contract Details add")
 	void givenContractTosavethenShouldreturnSavedContract() throws ContractException{
-		Contract contract = new Contract("201",500000);
+
 		when(contractrepo.save(any())).thenReturn(contract);
-		
-//		System.out.println(contractservice.addContract(contract));
 		
 		assertEquals(contract, contractservice.addContract(contract));
 		verify(contractrepo, times(1)).save(any());
 	}
 	
 	@Test
+	@DisplayName("get all contract ")
 	public void givenAllBlogsThenShouldreturnListOfAllBlogs() throws ContractException{
 		
 		contractrepo.save(contract);
@@ -104,50 +120,48 @@ public class ContractServiceTest {
 	}
 	
 	@Test
+	@DisplayName("get exception for duplicate contract number ")
 	public void givenContractTosaveThenShouldNotReturnSavedContract() {
-		Contract contract = new Contract("201",500000);
-		
+	
 		when(contractrepo.save(contract)).thenThrow(new RuntimeException());
 		
-		// It throws an error thats why assertThrows() is passed.
 		assertThrows(RuntimeException.class, () -> {contractservice.addContract(contract);});
 		
 		verify(contractrepo, times(1)).save(contract);
 	}
 	
 	@Test
+	@DisplayName("get by Id ")
 	void givenContractNumberThenShouldreturnRespectiveContract() throws ContractException{
-		Contract contract = new Contract("201",500000);
 		
-		when(contractrepo.findById("101")).thenReturn(Optional.of(contract));
+		when(contractrepo.findById("102")).thenReturn(Optional.of(contract2));
 		
-		Contract receivedContract = contractservice.getContract(contract.getContractNumber());
+		Contract receivedContract = contractservice.getContract(contract2.getContractNumber());
 		
-		verify(contractrepo, times(1)).findById("201");
+		verify(contractrepo, times(1)).findById("102");
 	}
 	
 	@Test
+	@DisplayName("contract Details should delete")
 	void givenContractNumberThenShouldDeleteRespectiveContract()throws ContractException{
 		
-		Contract contract = new Contract("201",500000);
 		
-		when(contractrepo.findById(contract.getContractNumber())).thenReturn(optional);
+		contractrepo.save(contract);
 		 
-		boolean deletedContract = contractservice.deleteContract("201");
+		boolean deletedContract = contractservice.deleteContract("101");
 		
 		System.out.println(deletedContract);
 		
 		assertEquals(false, deletedContract);
 		
-//		verify(contractrepo, times(2)).findById(contract.getContractNumber());
+		verify(contractrepo, times(0)).findById(contract.getContractNumber());
 		
-//		verify(contractrepo, times(1)).deleteById(contract.getContractNumber());
 	}
 	
 	@Test
+	@DisplayName("contract Details should update")
 	public void givenContractToUpdateThenShouldReturnUpdatedContract() throws ContractException {
 		
-		Contract contract = new Contract("201",500000);
 		
 		when(contractrepo.existsById(contract.getContractNumber())).thenReturn(true);
 		
@@ -162,8 +176,5 @@ public class ContractServiceTest {
 		assertEquals(true, flag);
 	}
 	
-	
-	
-	
-	
+
 }

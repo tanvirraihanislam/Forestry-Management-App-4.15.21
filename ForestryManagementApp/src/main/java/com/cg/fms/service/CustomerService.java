@@ -19,5 +19,6 @@ public interface CustomerService {
 	public List<Customer> getAllCustomers();
 	
 	public String login(String customerId,String customerPassword);
-
+	
+	
 }

@@ -50,7 +50,7 @@ public class PoductControlle{
 		a.setProductName(productName);
 		a.setProductDescription(productDescription);
 		a.setProductQuantity(productQuantity);
-		if(productservice.addProduct(a)) {
+		if(productservice.addProduct(a) != null) {
 			return "New Product added";
 		}
 		else {

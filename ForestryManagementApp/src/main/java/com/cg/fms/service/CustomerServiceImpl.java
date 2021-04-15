@@ -63,9 +63,14 @@ public class CustomerServiceImpl implements CustomerService{
 		return (List<Customer>)ado.findAll();
 	}
 
-	@Override
-	public String login(String customerId, String customerPassword) {
-		// TODO Auto-generated method stub
-		return null;
+		@Override
+		public String login(String customerId, String customerPassword) {
+			Customer c = ado.searchPassword(customerId,customerPassword);
+			if(c == null) {
+				return "Login Failed";
+			}
+			
+			return "Login Successful";
+		}
 	}
-}
+

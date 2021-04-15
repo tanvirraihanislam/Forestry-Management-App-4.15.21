@@ -12,7 +12,7 @@ import com.cg.fms.dto.Product;
 public interface ProductService  {
 	public Product getProduct(String productId);
 
-	public boolean addProduct(Product product);
+	public Product addProduct(Product product);
 
 	public boolean updateProduct(Product product);
 

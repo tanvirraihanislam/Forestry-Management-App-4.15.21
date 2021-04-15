@@ -11,6 +11,7 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -43,9 +44,8 @@ public class ContractRepositoryTest {
 			e1.printStackTrace();
 		}
 		
-		Contract contract = new Contract();
+		contract = new Contract();
 		
-//		Contract contract = new Contract(null,  0,  null,  null);
 		contract.setContractNumber("101");
 		contract.setQuotation(500000);
 		contract.setStartDate(strdate);
@@ -55,11 +55,17 @@ public class ContractRepositoryTest {
 		contract.setCustomer(null);
 		contract.setLand(null);
 		
-		Contract contract2 = new Contract(null,  0,  null,  null);
+		contract2 = new Contract();
+		
 		contract2.setContractNumber("102");
 		contract2.setQuotation(30000);
 		contract2.setStartDate(strdate);
 		contract2.setEndDate(enddate);
+		contract2.setAdmin(null);
+		contract2.setContractStatus("pending");
+		contract2.setCustomer(null);
+		contract2.setLand(null);
+		
 		
 	}
 	
@@ -71,14 +77,12 @@ public class ContractRepositoryTest {
 	}
 	
 	@Test
-	public void getById() {
-//		System.out.println("Abir Das");
-//		Contract contract = new Contract("122222",500000);
+	@DisplayName("get by Id ")
+	public void givenContractNumberThenShouldReturnCorrespondingContractDetails() {
+		
 		System.out.println(contract);
 		Contract contract1 = contractrepo.save(contract);
-		
-//		System.out.println(contractrepo.save(contract));
-		
+				
 		Optional<Contract> optional = contractrepo.findById(contract1.getContractNumber());
 		
 		assertEquals(contract1.getContractNumber(), optional.get().getContractNumber());
@@ -86,25 +90,23 @@ public class ContractRepositoryTest {
 	}
 	
 	@Test
-	public void save() {
+	@DisplayName("Contract Details add")
+	public void givenContractNumberThenShouldSaveItAndRetunThisSavedContract() {
 		
-		Contract contract = new Contract("201", 500000);
 		contractrepo.save(contract);
 		
 		Contract fetchedContract = contractrepo.findById(contract.getContractNumber()).get();
 		
-		assertEquals("201", fetchedContract.getContractNumber());
+		assertEquals("101", fetchedContract.getContractNumber());
 		
 	}
 	
 	@Test
+	@DisplayName("get all contract details ")
 	public void givenGetAllContractsThenShouldReturnListOfAllContract() {
 		
-		Contract contract = new Contract("201", 500000);
-		Contract contrac2 = new Contract("202", 300000);
-		
 		contractrepo.save(contract);
-		contractrepo.save(contrac2);
+		contractrepo.save(contract2);
 		
 		List<Contract> contractList = contractrepo.findAll();
 		
@@ -115,8 +117,8 @@ public class ContractRepositoryTest {
 	}
 	
 	@Test
+	@DisplayName("contract Details should delete")
 	public void givenContractIdThenShouldReturnDeletedContract() {
-		Contract contract2 = new Contract("201", 500000);
 		
 		contractrepo.save(contract2);
 		contractrepo.deleteById(contract2.getContractNumber());

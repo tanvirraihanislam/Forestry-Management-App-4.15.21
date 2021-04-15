@@ -24,13 +24,13 @@ public class ProductServiceImpl implements ProductService {
 		}
 
 	@Override
-	public boolean addProduct(Product product) {
+	public Product addProduct(Product product) {
 		// TODO Auto-generated method stub
 		if(ado.existsById(product.getProductId())) {
 			throw new ProductException("product with number "+product.getProductId()+" already exists");
 		}else {
-			ado.save(product);
-			return true;
+			Product savedProduct = ado.save(product);
+			return savedProduct;
 		}
 	}
 
