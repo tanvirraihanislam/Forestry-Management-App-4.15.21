@@ -1,0 +1,52 @@
+
+<div class='admin'>
+
+    <h3 style="text-align:center"> Create Admin</h3>
+
+    <form #adminForm='ngForm' (submit)='createNew(adminForm.value)'>
+
+        <div class='form-group'>
+            <label for='adminId'>Admin Id</label>
+            <input id='adminId' class='form-control' type='text' ngModel name='adminId' #tempId='ngModel' required>
+        </div>
+        
+        <div *ngIf='tempId.touched && tempId.invalid' class='alert alert-danger'>
+            Please enter admin id. This field required
+        </div>
+
+        <div class='form-group'>
+            <label for='nm'>Admin name</label>
+            <input id='nm' class='form-control' type='text' ngModel name='adminName' #tname='ngModel' required>
+        </div>
+        <div *ngIf='tname.touched && tname.invalid'>
+            <div *ngIf='tname.errors.required' class='alert alert-danger'>
+                Please enter Admin name
+            </div>
+
+        </div>
+        <div class='form-group'>
+            <label for='sal'>Admin Password</label>
+            <input id='sal' class='form-control' type='password' ngModel #tsalary='ngModel' required name='adminPassword'>
+        </div>
+        <div *ngIf='tsalary.touched && tsalary.invalid' class='alert alert-danger'>
+            Please enter Admin password
+        </div>
+
+
+        <button type='submit' class='btn btn-primary btn-block' [disabled]='adminForm.invalid'>Submit</button>
+    </form>
+
+    <p  class='alert alert-success' *ngIf='successMessage != null' (click)='successMessage=null'>
+        {{successMessage}}
+    </p>
+   
+    <div *ngIf='errorMessage != null' class='alert alert-danger' (click)='errorMessage=null'>
+        {{errorMessage}}
+    </div>
+
+    <div *ngIf='validationMessages != null' (click)='validationMessages=null'>
+        <p *ngFor='let msg of validationMessages' class='alert alert-danger'>
+            {{msg}}
+        </p>
+    </div>
+</div>

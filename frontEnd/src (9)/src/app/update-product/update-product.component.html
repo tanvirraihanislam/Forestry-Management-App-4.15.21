@@ -1,0 +1,46 @@
+
+<div class='prod'>
+    <div *ngIf='product != null'>
+        <table class='table'>
+            <tr>           
+                <td>Product Id</td>
+                <td><input type='text' [(ngModel)]='product.productId' readonly></td>
+            </tr>
+            <tr>
+                <td>product Name</td>
+                <td><input type='text' [(ngModel)]='product.productName'></td>
+            </tr>
+            <tr>
+                <td>Product Description</td>
+                <td><input type='text' [(ngModel)]='product.productDescription'></td>
+            </tr>
+            <tr>
+                <td>Product Quantity</td>
+                <td><input type='text' [(ngModel)]='product.productQuantity'></td>
+            </tr>
+           
+
+        </table>
+        
+        <button (click)='updated()' class='btn btn-success btn-block'>Update</button>
+        <button (click)='goBack()' class='btn btn-primary btn-block'>Back</button>
+
+
+
+        <p class='alert alert-success' *ngIf='successMessage != null' (click)='successMessage=null'>
+            {{successMessage}}
+        </p>
+
+    </div>
+
+    <div *ngIf='errorMessage != null' class='alert alert-danger' (click)='errorMessage=null'>
+        {{errorMessage}}
+    </div>
+
+    <div *ngIf='validationMessages != null' (click)='validationMessages=null'>
+        <p *ngFor='let msg of validationMessages' class='alert alert-danger'>
+            {{msg}}
+        </p>
+    </div>
+</div>
+

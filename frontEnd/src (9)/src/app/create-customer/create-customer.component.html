@@ -1,0 +1,98 @@
+
+<div class='cust'>
+
+    <h3 style="text-align:center"> Create Customer</h3>
+
+    <form #customerForm='ngForm' (submit)='createNew(customerForm.value)'>
+
+        <div class='form-group'>
+            <label for='customerId'>Customer Id</label>
+            <input id='customerId' class='form-control' type='text' ngModel name='customerId' #customerId='ngModel' required>
+        </div>
+        
+        <div *ngIf='customerId.touched && customerId.invalid' class='alert alert-danger'>
+            Please enter Customer Id. This field required.
+        </div>
+
+        <div class='form-group'>
+            <label for='cName'>Customer Name</label>
+            <input id='cName' class='form-control' type='text' ngModel #cusName='ngModel' required name='customerName'>
+        </div>
+        <div *ngIf='cusName.touched && cusName.invalid' class='alert alert-danger'>
+            Please enter Customer Name
+        </div>
+
+        <div class='form-group'>
+            <label for='cTyPe'>Customer Type</label>
+            <input id='cType' class='form-control' type='text' ngModel name='customerType' #cusType='ngModel' required >
+        </div>
+        <div *ngIf='cusType.touched && cusType.invalid' class='alert alert-danger'>
+            Please enter Customer Type
+        </div>
+
+        <div class='form-group'>
+            <label for='cPass'>Customer Password</label>
+            <input id='cPass' class='form-control' type='text' ngModel name='customerPassword' #cusPass='ngModel' required >
+        </div>
+        <div *ngIf='cusPass.touched && cusPass.invalid' class='alert alert-danger'>
+            Please enter Customer Password
+        </div>
+
+        <div class='form-group'>
+            <label for='cMail'>Customer Mail</label>
+            <input id='cMail' class='form-control' type='text' ngModel name='customerEmail' #cusMail='ngModel' required >
+        </div>
+        <div *ngIf='cusMail.touched && cusMail.invalid' class='alert alert-danger'>
+            Please enter Customer Mail
+        </div>
+
+        <div class='form-group'>
+            <label for='cAddress'>Customer Address</label>
+            <input id='cAddress' class='form-control' type='text' ngModel name='customerAddress' #cusAddress='ngModel' required >
+        </div>
+        <div *ngIf='cusAddress.touched && cusAddress.invalid' class='alert alert-danger'>
+            Please enter Customer Mail
+        </div>
+
+        <div class='form-group'>
+            <label for='cTown'>Customer Town</label>
+            <input id='cTown' class='form-control' type='text' ngModel name='customerTown' #cusTown='ngModel' required >
+        </div>
+        <div *ngIf='cusTown.touched && cusTown.invalid' class='alert alert-danger'>
+            Please enter Customer Mail
+        </div>
+
+        <div class='form-group'>
+            <label for='cPostalCode'>Customer PostalCode</label>
+            <input id='cPostalCode' class='form-control' type='text' ngModel name='customerPostalCode' #cusPostalCode='ngModel' required >
+        </div>
+        <div *ngIf='cusPostalCode.touched && cusPostalCode.invalid' class='alert alert-danger'>
+            Please enter Customer PostalCode
+        </div>
+
+        <div class='form-group'>
+            <label for='cContact'>Customer Contact</label>
+            <input id='cContact' class='form-control' type='text' ngModel name='customerContact' #cusContact='ngModel' required >
+        </div>
+        <div *ngIf='cusContact.touched && cusContact.invalid' class='alert alert-danger'>
+            Please enter Customer Contact
+        </div>
+
+        <button type='submit' class='btn btn-primary btn-block' [disabled]='customerForm.invalid'>Submit</button>
+    </form>
+
+    <p  class='alert alert-success' *ngIf='successMessage != null' (click)='successMessage=null'>
+        {{successMessage}}
+    </p>
+   
+    <div *ngIf='errorMessage != null' class='alert alert-danger' (click)='errorMessage=null'>
+        {{errorMessage}}
+    </div>
+
+    <div *ngIf='validationMessages != null' (click)='validationMessages=null'>
+        <p *ngFor='let msg of validationMessages' class='alert alert-danger'>
+            {{msg}}
+        </p>
+    </div>
+
+</div>

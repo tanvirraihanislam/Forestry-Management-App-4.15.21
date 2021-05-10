@@ -1,0 +1,68 @@
+
+<div class='lnd'>
+    <div *ngIf='customer != null'>
+        <table class='table'>
+            <tr>
+                <td>Customer Id</td>
+                <td><input type='text' [(ngModel)]='customer.customerId' readonly></td>
+            </tr>
+            <tr>
+                <td>Customer Name</td>
+                <td><input type='text' [(ngModel)]='customer.customerName'></td>
+            </tr>
+            <tr>
+                <td>Customer Type</td>
+                <td><input type='text' [(ngModel)]='customer.customerType'></td>
+            </tr>
+            <tr>
+                <td>Customer Password</td>
+                <td><input type='text' [(ngModel)]='customer.customerPassword'></td>
+            </tr>
+            <tr>
+                <td>Customer Email</td>
+                <td><input type='text' [(ngModel)]='customer.customerEmail' ></td>
+            </tr>
+            <tr>
+                <td>Customer Address</td>
+                <td><input type='text' [(ngModel)]='customer.customerAddress'></td>
+            </tr>
+            <tr>
+                <td>Customer Town</td>
+                <td><input type='text' [(ngModel)]='customer.customerTown'></td>
+            </tr>
+            <tr>
+                <td>Customer PostalCode</td>
+                <td><input type='text' [(ngModel)]='customer.customerPostalCode'></td>
+            </tr>
+            <tr>
+                <td>Customer Contact</td>
+                <td><input type='text' [(ngModel)]='customer.customerContact' readonly></td>
+            </tr>
+
+
+            
+            
+        </table>
+        
+        <button (click)='updated()' class='btn btn-success btn-block'>Update</button>
+        <button (click)='goBack()' class='btn btn-primary btn-block'>Back</button>
+
+
+
+        <p class='alert alert-success' *ngIf='successMessage != null' (click)='successMessage=null'>
+            {{successMessage}}
+        </p>
+
+    </div>
+
+    <div *ngIf='errorMessage != null' class='alert alert-danger' (click)='errorMessage=null'>
+        {{errorMessage}}
+    </div>
+
+    <div *ngIf='validationMessages != null' (click)='validationMessages=null'>
+        <p *ngFor='let msg of validationMessages' class='alert alert-danger'>
+            {{msg}}
+        </p>
+    </div>
+</div>
+

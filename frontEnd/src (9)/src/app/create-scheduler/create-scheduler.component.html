@@ -1,0 +1,60 @@
+<div class='emp'>
+
+    <h3 style="text-align:center"> Create Scheduler</h3>
+
+    <form #SchedulerForm='ngForm' (submit)='createNew(SchedulerForm.value)'>
+
+        <div class='form-group'>
+            <label for='SchedulerId'>Scheduler Id</label>
+            <input id='SchedulerId' class='form-control' type='text' ngModel name='schedulerId' #tempId='ngModel' required>
+        </div>
+        
+        <div *ngIf='tempId.touched && tempId.invalid' class='alert alert-danger'>
+            Please enter scheduler id. This field required
+        </div>
+
+        <div class='form-group'>
+            <label for='nm'>Scheduler Name</label>
+            <input id='nm' class='form-control' type='text' ngModel name='schedulerName' #tname='ngModel' required>
+        </div>
+        <div *ngIf='tname.touched && tname.invalid'>
+            <div *ngIf='tname.errors.required' class='alert alert-danger'>
+                Please enter Scheduler name
+            </div>
+
+        </div>
+        <div class='form-group'>
+            <label for='sal'>Scheduler Contact</label>
+            <input id='sal' class='form-control' type='text' ngModel #tsalary='ngModel' required name='schedulerContact'>
+        </div>
+        <div *ngIf='tsalary.touched && tsalary.invalid' class='alert alert-danger'>
+            Please enter scheduler contact
+        </div>
+
+        <div class='form-group'>
+            <label for='sal'>Truck Number</label>
+            <input id='sal' class='form-control' type='text' ngModel #tsalary='ngModel'  name='truckNumber' required >
+        </div>
+        <div *ngIf='tsalary.touched && tsalary.invalid' class='alert alert-danger'>
+            Please enter truck number
+        </div>
+
+
+
+        <button type='submit' class='btn btn-primary btn-block' [disabled]='SchedulerForm.invalid'>Submit</button>
+    </form>
+
+    <p  class='alert alert-success' *ngIf='successMessage != null' (click)='successMessage=null'>
+        {{successMessage}}
+    </p>
+   
+    <div *ngIf='errorMessage != null' class='alert alert-danger' (click)='errorMessage=null'>
+        {{errorMessage}}
+    </div>
+
+    <div *ngIf='validationMessages != null' (click)='validationMessages=null'>
+        <p *ngFor='let msg of validationMessages' class='alert alert-danger'>
+            {{msg}}
+        </p>
+    </div>
+</div>

@@ -1,0 +1,93 @@
+
+<div class='cont'>
+
+    <h3 style="text-align:center"> Create Contract</h3>
+
+    <form #contractForm='ngForm' (submit)='createNew(contractForm.value)'>
+
+        <div class='form-group'>
+            <label for='contractNumber'>Contract Number</label>
+            <input id='contractNumber' class='form-control' type='text' ngModel name='contractNumber' #tempId='ngModel' required>
+        </div>
+        
+        <div *ngIf='tempId.touched && tempId.invalid' class='alert alert-danger'>
+            Please enter Contract Number. This field required
+        </div>
+
+        <div class='form-group'>
+            <label for='quotation'>Quotation</label>
+            <input id='quotation' class='form-control' type='number' ngModel name='quotation' #tname='ngModel' required>
+        </div>
+        <div *ngIf='tname.touched && tname.invalid'>
+            <div *ngIf='tname.errors.required' class='alert alert-danger'>
+                Please enter Quotation
+            </div>
+
+        </div>
+        <div class='form-group'>
+            <label for='startDate'>Start tDate</label>
+            <input id='startDate' class='form-control' type='datetime' ngModel #towner='ngModel' name='startDate' required>
+        </div>
+        <div *ngIf='towner.touched && towner.invalid' class='alert alert-danger'>
+            Please enter Start Date
+        </div>
+
+        <div class='form-group'>
+            <label for='endDate'>End Date</label>
+            <input id='endDate' class='form-control' type='datetime' ngModel #tarea='ngModel' name='endDate' required >
+        </div>
+        <div *ngIf='tarea.touched && tarea.invalid' class='alert alert-danger'>
+            Please enter End Date
+        </div>
+
+        <div class='form-group'>
+            <label for='contractStatus'>Contract Status</label>
+            <input id='contractStatus' class='form-control' type='text' ngModel #tarea='ngModel' name='contractStatus' required >
+        </div>
+        <div *ngIf='tarea.touched && tarea.invalid' class='alert alert-danger'>
+            Please enter Contract Status
+        </div>
+
+        <div class='form-group'>
+            <label for='customerId'>Customer Id</label>
+            <input id='customerId' class='form-control' type='text' ngModel #tarea='ngModel' name='customerId' required >
+        </div>
+        <div *ngIf='tarea.touched && tarea.invalid' class='alert alert-danger'>
+            Please enter Customer Id
+        </div>
+
+        <div class='form-group'>
+            <label for='adminId'>Admin Id</label>
+            <input id='adminId' class='form-control' type='text' ngModel #tarea='ngModel' name='adminId' required >
+        </div>
+        <div *ngIf='tarea.touched && tarea.invalid' class='alert alert-danger'>
+            Please enter Admin Id
+        </div>
+
+        <div class='form-group'>
+            <label for='landId'>Land Id</label>
+            <input id='landId' class='form-control' type='text' ngModel #tarea='ngModel' name='landId' required >
+        </div>
+        <div *ngIf='tarea.touched && tarea.invalid' class='alert alert-danger'>
+            Please enter Land Id
+        </div>
+
+
+
+        <button type='submit' class='btn btn-primary btn-block' [disabled]='contractForm.invalid'>Submit</button>
+    </form>
+
+    <p  class='alert alert-success' *ngIf='successMessage != null' (click)='successMessage=null'>
+        {{successMessage}}
+    </p>
+   
+    <div *ngIf='errorMessage != null' class='alert alert-danger' (click)='errorMessage=null'>
+        {{errorMessage}}
+    </div>
+
+    <div *ngIf='validationMessages != null' (click)='validationMessages=null'>
+        <p *ngFor='let msg of validationMessages' class='alert alert-danger'>
+            {{msg}}
+        </p>
+    </div>
+</div>

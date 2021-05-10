@@ -1,0 +1,69 @@
+
+<div class='order'>
+    <div *ngIf='order != null'>
+        <table class='table'>
+            <tr>
+               
+                <td>order number</td>
+                <td><input type='text' [(ngModel)]='order.orderNumber' readonly></td>
+            </tr>
+            <tr>
+                <td>delivery place</td>
+                <td><input type='text' [(ngModel)]='order.deliveryPlace'></td>
+            </tr>
+            <tr>
+                <td>delivery date</td>
+                <td><input type='text' [(ngModel)]='order.deliveryDate'></td>
+            </tr>
+            <tr>
+                <td>quantity</td>
+                <td><input type='text' [(ngModel)]='order.quantity'></td>
+            </tr>
+
+            <tr>
+                <td>Product Id</td>
+                <td><input type='text' [(ngModel)]='order.products.productId'></td>
+            </tr>
+
+            <tr>
+                <td>Product Name</td>
+                <td><input type='text' [(ngModel)]='order.products.productName'></td>
+            </tr>
+
+            <tr>
+                <td>Product Description</td>
+                <td><input type='text' [(ngModel)]='order.products.productDescription'></td>
+            </tr>
+
+            <tr>
+                <td>Product Quantity</td>
+                <td><input type='text' [(ngModel)]='order.products.productQuantity'></td>
+            </tr>
+
+
+
+
+
+        </table>
+        
+        <button (click)='updated()' class='btn btn-success btn-block'>Update</button>
+        <button (click)='goBack()' class='btn btn-primary btn-block'>Back</button>
+
+
+
+        <p class='alert alert-success' *ngIf='successMessage != null' (click)='successMessage=null'>
+            {{successMessage}}
+        </p>
+
+    </div>
+
+    <div *ngIf='errorMessage != null' class='alert alert-danger' (click)='errorMessage=null'>
+        {{errorMessage}}
+    </div>
+
+    <div *ngIf='validationMessages != null' (click)='validationMessages=null'>
+        <p *ngFor='let msg of validationMessages' class='alert alert-danger'>
+            {{msg}}
+        </p>
+    </div>
+</div>

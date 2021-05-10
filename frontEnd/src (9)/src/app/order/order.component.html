@@ -1,0 +1,37 @@
+<div>
+    <h3 style='text-align:center;'>{{header}}</h3>
+ 
+    <table class='table'>
+        <tr>
+            <th>order number</th>
+            <th>delivery place</th>
+            <th>delivery date</th>
+            <th>quantity</th>
+            <th>Product Id</th>
+            <th>Product Name</th>
+            <th>Product Description</th>
+            <th>Product Quantity</th>
+           
+        </tr>
+        <tr *ngFor='let order of orders' style='padding:2px'>
+            <td>{{order.orderNumber}}</td>
+            <td>{{order.deliveryPlace}}</td>
+            <td>{{order.deliveryDate}}</td>
+            <td>{{order.quantity}}</td>
+
+            <td>{{order.products.productId}}</td>
+            <td>{{order.products.productName}}</td>
+            <td>{{order.products.productDescription}}</td>
+            <td>{{order.products.productQuantity}}</td>
+           
+           
+            
+            <td>
+                <button class='btn btn-danger' (click)='delete(order.orderNumber)'>Delete</button>
+                &nbsp;
+                <a [routerLink]="['/update-order', order.orderNumber]" class='btn btn-primary'>Modify</a>
+            
+            </td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,39 @@
+<div>
+    <h3 style='text-align:center;'>{{header}}</h3>
+    <div class="container-fluid">
+    <div class="input-group row justify-content-center align-items-center">
+           
+             <div class="alert alert-light col-12 text-center" role="alert" *ngIf="contractMsg!=null">
+            {{contractMsg}}
+          </div>
+          <div class="col-8">
+    <input [(ngModel)]="contractNumber"
+     class="form-control" type ="text" placeholder="Enter Contract Number">
+    </div>
+    <div class="col-4">
+    <button (click)="verifyContract()" class="btn btn-info">Verify Contract</button>
+</div>
+</div>
+</div>
+    <table class='table'>
+        <tr>
+            <th>Admin Id</th>
+            <th>Admin Name</th>
+            <th>Admin Password</th>
+            
+        </tr>
+        <tr *ngFor='let admin of admins' style='padding:2px'>
+            <td>{{admin.adminId}}</td>
+            <td>{{admin.adminName}}</td>
+            <td>{{admin.adminPassword}}</td>
+            
+            <td>
+                <button class='btn btn-danger' (click)='delete(admin.adminId)'>Delete</button>
+                &nbsp;
+                <a [routerLink]="['/update-admin',admin.adminId]" class='btn btn-primary'>Modify</a>
+            
+            </td>
+        </tr>
+    </table>
+</div>
+

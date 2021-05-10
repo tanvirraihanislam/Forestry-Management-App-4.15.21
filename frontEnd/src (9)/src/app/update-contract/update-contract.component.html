@@ -1,0 +1,57 @@
+
+<div class='cnt'>
+    <div *ngIf='contract != null'>
+        <table class='table'>
+            <tr>
+               
+                <td>Contract Number</td>
+                <td><input type='text' [(ngModel)]='contract.contractNumber' readonly></td>
+            </tr>
+            <tr>
+                <td>Quotation</td>
+                <td><input type='number' [(ngModel)]='contract.quotation'></td>
+            </tr>
+            <tr>
+                <td>Start Date</td>
+                <td><input type='datetime' [(ngModel)]='contract.startDate'></td>
+            </tr>
+            <tr>
+                <td>End Date</td>
+                <td><input type='datetime' [(ngModel)]='contract.endDate'></td>
+            </tr>
+            <tr>
+                <td>Contract Status</td>
+                <td><input type='text' [(ngModel)]='contract.contractStatus'></td>
+            </tr>
+            <tr>
+                <td>Admin Id</td>
+                <td><input type='text' [(ngModel)]='contract.admin.adminId'></td>
+            </tr>
+            <tr>
+                <td>Admin Name</td>
+                <td><input type='text' [(ngModel)]='contract.admin.adminName'></td>
+            </tr>
+
+        </table>
+        
+        <button (click)='updated()' class='btn btn-success btn-block'>Update</button>
+        <button (click)='goBack()' class='btn btn-primary btn-block'>Back</button>
+
+
+
+        <p class='alert alert-success' *ngIf='successMessage != null' (click)='successMessage=null'>
+            {{successMessage}}
+        </p>
+
+    </div>
+
+    <div *ngIf='errorMessage != null' class='alert alert-danger' (click)='errorMessage=null'>
+        {{errorMessage}}
+    </div>
+
+    <div *ngIf='validationMessages != null' (click)='validationMessages=null'>
+        <p *ngFor='let msg of validationMessages' class='alert alert-danger'>
+            {{msg}}
+        </p>
+    </div>
+</div>

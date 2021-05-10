@@ -1,0 +1,61 @@
+
+<div class='lnd'>
+
+    <h3 style="text-align:center"> Create Land</h3>
+
+    <form #landForm='ngForm' (submit)='createNew(landForm.value)'>
+
+        <div class='form-group'>
+            <label for='landId'>Land Id</label>
+            <input id='landId' class='form-control' type='text' ngModel name='landId' #tempId='ngModel' required>
+        </div>
+        
+        <div *ngIf='tempId.touched && tempId.invalid' class='alert alert-danger'>
+            Please enter Land id. This field required
+        </div>
+
+        <div class='form-group'>
+            <label for='nm'>Survey Number</label>
+            <input id='nm' class='form-control' type='text' ngModel name='surveyNumber' #tname='ngModel' required>
+        </div>
+        <div *ngIf='tname.touched && tname.invalid'>
+            <div *ngIf='tname.errors.required' class='alert alert-danger'>
+                Please enter Survey Number
+            </div>
+
+        </div>
+        <div class='form-group'>
+            <label for='sal'>Owner Name</label>
+            <input id='sal' class='form-control' type='text' ngModel #towner='ngModel' required name='ownerName'>
+        </div>
+        <div *ngIf='towner.touched && towner.invalid' class='alert alert-danger'>
+            Please enter Owner Name
+        </div>
+
+        <div class='form-group'>
+            <label for='sal'>Land Area</label>
+            <input id='sal' class='form-control' type='text' ngModel #tarea='ngModel' name='landArea' required >
+        </div>
+        <div *ngIf='tarea.touched && tarea.invalid' class='alert alert-danger'>
+            Please enter Land Area
+        </div>
+
+
+
+        <button type='submit' class='btn btn-primary btn-block' [disabled]='landForm.invalid'>Submit</button>
+    </form>
+
+    <p  class='alert alert-success' *ngIf='successMessage != null' (click)='successMessage=null'>
+        {{successMessage}}
+    </p>
+   
+    <div *ngIf='errorMessage != null' class='alert alert-danger' (click)='errorMessage=null'>
+        {{errorMessage}}
+    </div>
+
+    <div *ngIf='validationMessages != null' (click)='validationMessages=null'>
+        <p *ngFor='let msg of validationMessages' class='alert alert-danger'>
+            {{msg}}
+        </p>
+    </div>
+</div>

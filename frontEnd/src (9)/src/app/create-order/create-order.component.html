@@ -1,0 +1,85 @@
+
+<div class='order'>
+
+    <h3 style="text-align:center"> Create Order</h3>
+
+    <form #orderForm='ngForm' (submit)='createNew(orderForm.value)'>
+
+        <div class='form-group'>
+            <label for='orderNumber'>Order Number</label>
+            <input id='orderNumber' class='form-control' type='text' ngModel name='orderNumber' #tempId='ngModel' required>
+        </div>
+        
+        <div *ngIf='tempId.touched && tempId.invalid' class='alert alert-danger'>
+            Please enter Order id. This field required
+        </div>
+
+        <div class='form-group'>
+            <label for='nm'>delivery place</label>
+            <input id='nm' class='form-control' type='text' ngModel name='deliveryPlace' #tname='ngModel' required>
+        </div>
+        <div *ngIf='tname.touched && tname.invalid'>
+            <div *ngIf='tname.errors.required' class='alert alert-danger'>
+                Please enter delivery place
+            </div>
+
+        </div>
+        <div class='form-group'>
+            <label for='sal'>delivery date</label>
+            <input id='sal' class='form-control' type='text' ngModel #tsalary='ngModel' required name='deliveryDate'>
+        </div>
+        <div *ngIf='tsalary.touched && tsalary.invalid' class='alert alert-danger'>
+            Please enter delivery date
+        </div>
+
+        <div class='form-group'>
+            <label for='quantity'>quantity</label>
+            <input id='quantity' class='form-control' type='text' ngModel #tquantity='ngModel' name='quantity' required >
+        </div>
+        <div *ngIf='tquantity.touched && tquantity.invalid' class='alert alert-danger'>
+            Please enter quantity
+        </div>
+
+        <div class='form-group'>
+            <label for='quantity'>Customer Id</label>
+            <input id='quantity' class='form-control' type='text' ngModel #tquantity='ngModel' name='customerId' required >
+        </div>
+        <div *ngIf='tquantity.touched && tquantity.invalid' class='alert alert-danger'>
+            Please enter customerId
+        </div>
+
+        <div class='form-group'>
+            <label for='quantity'>Scheduler Id</label>
+            <input id='quantity' class='form-control' type='text' ngModel #tquantity='ngModel' name='schedulerId' required >
+        </div>
+        <div *ngIf='tquantity.touched && tquantity.invalid' class='alert alert-danger'>
+            Please enter Scheduler Id
+        </div>
+
+        <div class='form-group'>
+            <label for='quantity'>Product Id</label>
+            <input id='quantity' class='form-control' type='text' ngModel #tquantity='ngModel' name='productId' required >
+        </div>
+        <div *ngIf='tquantity.touched && tquantity.invalid' class='alert alert-danger'>
+            Please enter Product Id
+        </div>
+
+
+
+        <button type='submit' class='btn btn-primary btn-block' [disabled]='orderForm.invalid'>Submit</button>
+    </form>
+
+    <p  class='alert alert-success' *ngIf='successMessage != null' (click)='successMessage=null'>
+        {{successMessage}}
+    </p>
+   
+    <div *ngIf='errorMessage != null' class='alert alert-danger' (click)='errorMessage=null'>
+        {{errorMessage}}
+    </div>
+
+    <div *ngIf='validationMessages != null' (click)='validationMessages=null'>
+        <p *ngFor='let msg of validationMessages' class='alert alert-danger'>
+            {{msg}}
+        </p>
+    </div>
+</div>

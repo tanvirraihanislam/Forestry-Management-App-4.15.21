@@ -1,0 +1,43 @@
+
+<div class='sch'>
+    <div  *ngIf='scheduler != null' >
+        <table class='table'>
+            <tr>
+                <td>Scheduler Id</td>
+                <td><input type='text' [(ngModel)]='scheduler.schedulerId' readonly></td>
+            </tr>
+            <tr>
+                <td>Scheduler Name</td>
+                <td><input type='text' [(ngModel)]='scheduler.schedulerName'></td>
+            </tr>
+            <tr>
+                <td>Scheduler Contact</td>
+                <td><input type='text' [(ngModel)]='scheduler.schedulerContact'></td>
+            </tr>
+            <tr>
+                <td>Truck Number</td>
+                <td><input type='text' [(ngModel)]='scheduler.truckNumber'></td>
+            </tr>
+        </table>
+        
+        <button (click)='updated()' class='btn btn-success btn-block'>Update</button>
+        <button (click)='goBack()' class='btn btn-primary btn-block'>Back</button>
+
+
+
+        <p class='alert alert-success' *ngIf='successMessage != null' (click)='successMessage=null'>
+            {{successMessage}}
+        </p>
+
+    </div>
+
+    <div *ngIf='errorMessage != null' class='alert alert-danger' (click)='errorMessage=null'>
+        {{errorMessage}}
+    </div>
+
+    <div *ngIf='validationMessages != null' (click)='validationMessages=null'>
+        <p *ngFor='let msg of validationMessages' class='alert alert-danger'>
+            {{msg}}
+        </p>
+    </div>
+</div>

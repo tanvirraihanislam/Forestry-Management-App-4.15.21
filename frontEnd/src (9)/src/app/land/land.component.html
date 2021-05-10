@@ -1,0 +1,32 @@
+<div class='maindiv' *ngIf='errorMessage == null'>
+    <h3 style='text-align:center;'>{{header}}</h3>
+    <table class='table'>
+        <tr>
+            <th>Land Id</th>
+            <th>Survey Number</th>
+            <th>Owner Name</th>
+            <th>Land Area</th>
+        </tr>
+        <tr *ngFor='let land of lands' style='padding:2px'>
+            <td>{{land.landId}}</td>
+            <td>{{land.surveyNumber}}</td>
+            <td>{{land.ownerName}}</td>
+            <td>{{land.landArea}}</td>
+            <td>
+                <button class='btn btn-danger' (click)='delete(land.landId)'>Delete</button>
+                &nbsp;
+               
+                <a [routerLink]="['/update',land.landId]" class='btn btn-primary'>Modify</a>
+            
+            </td>
+        </tr>
+    </table>
+
+    <div *ngIf='message != null' (click)='message=null' class='alert alert-success'>
+        {{message}}
+    </div>
+</div>
+
+<div class='alert alert-danger' *ngIf='errorMessage != null'>
+    <h2>{{errorMessage}}</h2>
+</div>

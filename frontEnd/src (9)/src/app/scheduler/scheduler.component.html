@@ -1,0 +1,25 @@
+<div class="maindiv">
+    <h3 style='text-align:center;'>{{header}}</h3>
+    <table class='table'>
+        <tr>
+            <th>scheduler Id</th>
+            <th>scheduler Name</th>
+            <th>scheduler Contact</th>
+            <th>truck Number</th>
+        </tr>
+        <tr *ngFor='let scheduler of schedulers' style='padding:2px'>
+            <td>{{scheduler.schedulerId}}</td>
+            <td>{{scheduler.schedulerName}}</td>
+            <td>{{scheduler.schedulerContact}}</td>
+            <td>{{scheduler.truckNumber}}</td>
+            <td>
+                <button class='btn btn-danger' (click)='delete(scheduler.schedulerId)'>Delete</button>
+                
+            </td>
+            &nbsp;
+            <td>
+                <a [routerLink]="['/updatescheduler', scheduler.schedulerId]" class='btn btn-primary'>Modify</a>
+            </td>
+        </tr>
+    </table>
+</div>

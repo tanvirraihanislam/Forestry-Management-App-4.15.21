@@ -1,0 +1,39 @@
+<div class='maindiv' *ngIf='errorMessage == null'>
+    <h3 style='text-align:center;'>{{header}}</h3>
+    <table class='table'>
+        <tr>
+            <th>Contract Number</th>
+            <th>Quotatiin</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Contract Status</th>
+            <th>Admin Id</th>
+            
+        </tr>
+        <tr *ngFor='let contract of contracts' style='padding:2px'>
+            <td>{{contract.contractNumber}}</td>
+            <td>{{contract.quotation}}</td>
+            <td>{{contract.startDate}}</td>
+            <td>{{contract.endDate}}</td>
+            <td>{{contract.contractStatus}}</td>
+            <td *ngIf="contract.admin!=null">{{contract.admin.adminId}}</td>
+            <td *ngIf="contract.admin==null">-</td>
+            
+            
+            <td>
+                <button class='btn btn-danger' (click)='delete(contract.contractNumber)'>Delete</button>
+                &nbsp;
+                <a [routerLink]="['/updatecontract',contract.contractNumber]" class='btn btn-primary'>Modify</a>
+            
+            </td>
+        </tr>
+    </table>
+
+    <div *ngIf='message != null' (click)='message=null' class='alert alert-success'>
+        {{message}}
+    </div>
+</div>
+
+<div class='alert alert-danger' *ngIf='errorMessage != null'>
+    <h2>{{errorMessage}}</h2>
+</div>

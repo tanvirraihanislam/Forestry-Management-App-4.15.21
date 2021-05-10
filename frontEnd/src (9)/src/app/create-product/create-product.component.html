@@ -1,0 +1,60 @@
+
+<div class='prod'>
+
+    <h3 style="text-align:center"> Create Product</h3>
+
+    <form #ProductForm='ngForm' (submit)='createNew(ProductForm.value)'>
+
+        <div class='form-group'>
+            <label for='productId'>Product Id</label>
+            <input id='productId' class='form-control' type='text' ngModel name='productId' #tempId='ngModel' required>
+        </div>
+        
+        <div *ngIf='tempId.touched && tempId.invalid' class='alert alert-danger'>
+            Please enter Product Id. This field required
+        </div>
+
+        <div class='form-group'>
+            <label for='productName'>Product Name</label>
+            <input id='productName' class='form-control' type='text' ngModel name='productName' #tname='ngModel' required>
+        </div>
+        <div *ngIf='tname.touched && tname.invalid'>
+            <div *ngIf='tname.errors.required' class='alert alert-danger'>
+                Please enter Product Name
+            </div>
+
+        </div>
+        <div class='form-group'>
+            <label for='productDescription'>Product Description</label>
+            <input id='productDescription' class='form-control' type='text' ngModel #towner='ngModel' name='productDescription' required>
+        </div>
+        <div *ngIf='towner.touched && towner.invalid' class='alert alert-danger'>
+            Write a small description
+        </div>
+
+        <div class='form-group'>
+            <label for='productQuantity'>Product Quantity</label>
+            <input id='productQuantity' class='form-control' type='text' ngModel #tarea='ngModel' name='productQuantity' required >
+        </div>
+        <div *ngIf='tarea.touched && tarea.invalid' class='alert alert-danger'>
+            Quantity
+        </div>
+
+
+        <button type='submit' class='btn btn-primary btn-block' [disabled]='ProductForm.invalid'>Submit</button>
+    </form>
+
+    <p  class='alert alert-success' *ngIf='successMessage != null' (click)='successMessage=null'>
+        {{successMessage}}
+    </p>
+   
+    <div *ngIf='errorMessage != null' class='alert alert-danger' (click)='errorMessage=null'>
+        {{errorMessage}}
+    </div>
+
+    <div *ngIf='validationMessages != null' (click)='validationMessages=null'>
+        <p *ngFor='let msg of validationMessages' class='alert alert-danger'>
+            {{msg}}
+        </p>
+    </div>
+</div>

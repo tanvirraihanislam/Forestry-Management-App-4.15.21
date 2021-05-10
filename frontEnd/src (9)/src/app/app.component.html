@@ -1,0 +1,106 @@
+
+<div id="bg">
+<div class="container">
+  <div class="header">
+    <p id="fms">Forestry Management System</p>
+  </div>
+
+<br><br><br><br>
+
+<button type="button" (click)="toggle3()" class="btn btn-primary" routerLink="">Home</button>
+&nbsp;
+&nbsp;
+<button type="button" (click)="toggle4()" class="btn btn-primary" routerLink="">Show Table</button>
+
+
+    
+  <button *ngIf="showNot" type="button" class="btn btn-primary btn-lg float-right" routerLink="login" >Login</button>
+
+  <button (click)="toggle()" *ngIf="showMe" type="button" class="btn btn-danger btn-lg float-right" routerLink="logout" >Logout</button>
+  <br><br><br><br>
+  <p id="amra" *ngIf="showText">This is a single page web Application regarding Forestry Management System. Forests supply us with oxygen conversion and also with various daily use
+    resources. They are the major source for wood and also for food items. This application helps you to buy such resources and is very easy to use.
+  </p>
+
+  &nbsp;
+  
+  <!-- <button (click)="toggle2()" *ngIf="showMe" type="button" class="btn btn-primary btn-lg float-center" >Back</button> -->
+  <br>
+
+  <div *ngIf="showMe">
+  <table *ngIf="showTable" class="table table-striped">
+    <thead>
+      <tr>
+      <th>Name</th>
+      <th>Description</th>
+      </tr>
+    </thead>
+    <tr>
+      <td><button (click)="toggle2()" type="button" class="btn btn-primary" routerLink="landlist" >Land</button></td>
+      <td><p id="text">Used to see all land details</p></td>
+  </tr>
+    <tr>
+      <td><button  (click)="toggle2()" type="button" class="btn btn-success" routerLink="create" >Create Land</button></td>
+      <td><p id="text">Used to create Land Detail</p></td>
+    </tr>
+    <tr>
+      <td><button  (click)="toggle2()" type="button" class="btn btn-primary" routerLink="contractlist" >Contract List</button></td>
+      <td><p id="text">Used to view all contracts</p></td></tr>
+    <tr>
+      <td><button  (click)="toggle2()" type="button" class="btn btn-success" routerLink="createcontract" >Create Contract</button></td>
+      <td><p id="text">Used to create contracts</p></td></tr>
+    <tr>
+      <td><button  (click)="toggle2()" type="button" class="btn btn-primary" routerLink="productlist" >Product List</button></td>
+      <td><p id="text">Used to view all Product details</p></td>
+    </tr>
+    <tr>
+      <td><button  (click)="toggle2()" type="button" class="btn btn-success" routerLink="createproduct" >Create Product</button></td>
+      <td><p id="text">Used to create Product</p></td>
+    </tr>
+    <tr>
+      <td><button  (click)="toggle2()" type="button" class="btn btn-primary" routerLink="adminlist" >Admin List</button></td>
+      <td><p id="text">Used to view All Admins</p></td>
+    </tr>
+    <tr>
+      <td><button  (click)="toggle2()" type="button" class="btn btn-success" routerLink="createadmin" >Create Admin</button></td>
+      <td><p id="text">Used to create Admin</p></td>
+    </tr>
+    <tr>
+      <td><button  (click)="toggle2()" type="button" class="btn btn-primary" routerLink="schedulerlist" >Scheduler List</button></td>
+      <td><p id="text">Used to view all Schedulers</p></td>
+    </tr>
+    <tr>
+      <td><button  (click)="toggle2()" type="button" class="btn btn-success" routerLink="createscheduler" >Create Scheduler</button></td>
+      <td><p id="text">Used to create Scheduler</p></td>
+    </tr>
+    <tr>
+      <td><button  (click)="toggle2()" type="button" class="btn btn-primary" routerLink="orderlist" >Order List</button></td>
+      <td><p id="text">Used to view all Orders</p></td>
+    </tr>
+    <tr>
+      <td><button  (click)="toggle2()" type="button" class="btn btn-success" routerLink="create-order" >Create Order</button></td>
+      <td><p id="text">Used to create an Order</p></td>
+    </tr>
+    <tr>
+      <td><button  (click)="toggle2()" type="button" class="btn btn-primary" routerLink="customerlist" >Customer List</button></td>
+      <td><p id="text">Used to view all Customers</p></td>
+    </tr>
+    <tr>
+      <td><button  (click)="toggle2()" type="button" class="btn btn-success" routerLink="createcustomer" >Create Customer</button></td>
+      <td><p id="text">Used to create a Customer</p></td>
+    </tr>
+  </table>
+</div>
+  
+     
+ 
+  <br><br><br>
+ 
+  <router-outlet></router-outlet>
+ 
+  </div>
+</div>
+    
+
+ 
+
